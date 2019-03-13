@@ -1,0 +1,113 @@
+﻿<Page x:Class="CalendarExplorer.Samples.Calendar.CalendarExplorer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:appointments="using:Windows.ApplicationModel.Appointments"
+      mc:Ignorable="d"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <CommandBar DefaultLabelPosition="Right" VerticalContentAlignment="Center">
+            <AppBarButton x:Name="BackButton" Icon="Back" Label="Back" Click="BackButton_OnClick" Visibility="Collapsed"/>
+            <AppBarButton Icon="Add" Label="Add" Click="AddButton_OnClick"/>
+            <AppBarButton Icon="Refresh" Label="Refresh" Click="RefreshButton_OnClick"/>
+        </CommandBar>
+        <ListView Grid.Row="1" x:Name="CalendarListView" ItemClick="ListView_OnItemClick" IsItemClickEnabled="True">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="Margin" Value="4"/>
+                    <Setter Property="Padding" Value="4"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="appointments:AppointmentCalendar">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock VerticalAlignment="Center">SourceDisplayName: <Run Text="{x:Bind SourceDisplayName, Mode=OneWay}" FontWeight="SemiBold"/>
+                            <LineBreak/>UserDataAccountId: <Run Text="{x:Bind UserDataAccountId}" FontWeight="SemiBold"/>
+                        </TextBlock>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="12,0">
+                            <TextBlock Text="AppointmentCalendar.DisplayName"/>
+                            <TextBox Text="{x:Bind DisplayName, Mode=TwoWay}" VerticalAlignment="Center"/>
+                            <CheckBox IsChecked="{x:Bind IsHidden, Mode=TwoWay}" VerticalAlignment="Center" Content="IsHidden"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="AppointmentCalendar.LocalId"/>
+                            <TextBlock Text="{x:Bind LocalId}" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.RowSpan="2">
+                <Run Text="CanCreateOrUpdateAppointments"/> <Run Text="{x:Bind CanCreateOrUpdateAppointments}" FontWeight="SemiBold"/><LineBreak/>
+<Run Text="DisplayColor"/> <Run Text="{x:Bind DisplayColor}" FontWeight="SemiBold"/><LineBreak/>
+<Run Text="OtherAppReadAccess"/> <Run Text="{x:Bind OtherAppReadAccess}" FontWeight="SemiBold"/><LineBreak/>
+<Run Text="SyncManager"/> <Run Text="{x:Bind SyncManager, Mode=OneWay}" FontWeight="SemiBold"/><LineBreak/>
+<Run Text="SummaryCardView"/> <Run Text="{x:Bind SummaryCardView}" FontWeight="SemiBold"/>
+                            </TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="1">
+                                <Run Text="OtherAppWriteAccess: "/><Run Text="{x:Bind OtherAppWriteAccess, Mode=OneWay}" FontWeight="SemiBold"/>
+                            </TextBlock>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Row="1" x:Name="AppointmentSection" Visibility="Collapsed">
+            <GridView x:Name="AppointmentListView">
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="BorderBrush" Value="Gray"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="Margin" Value="4"/>
+                        <Setter Property="Padding" Value="4"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="appointments:Appointment">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.ColumnSpan="2"><Run Text="LocalId"/> <Run Text="{x:Bind LocalId}"/><LineBreak/>
+                            <Run Text="Subject"/> <Run Text="{x:Bind Subject}" FontWeight="SemiBold"/><LineBreak/>
+<Run Text="StartTime"/> <Run Text="{x:Bind StartTime}" FontWeight="SemiBold"/><LineBreak/>
+<Run Text="Duration"/> <Run Text="{x:Bind Duration}" FontWeight="SemiBold"/>
+                            </TextBlock>
+                            <Button Grid.Row="0" Grid.Column="2" Style="{ThemeResource TextBlockButtonStyle}" Click="DeleteAppointmentButton_OnClick">
+                                <SymbolIcon Grid.Column="3" Symbol="Delete"/>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </Grid>
+    </Grid>
+</Page>
