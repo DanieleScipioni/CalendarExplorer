@@ -40,7 +40,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock VerticalAlignment="Center">SourceDisplayName: <Run Text="{x:Bind SourceDisplayName, Mode=OneWay}" FontWeight="SemiBold"/>
+                        <TextBlock VerticalAlignment="Center">SourceDisplayName: <Run Text="{x:Bind SourceDisplayName}" FontWeight="SemiBold"/>
                             <LineBreak/>UserDataAccountId: <Run Text="{x:Bind UserDataAccountId}" FontWeight="SemiBold"/>
                         </TextBlock>
                         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="12,0">
@@ -65,11 +65,11 @@
                 <Run Text="CanCreateOrUpdateAppointments"/> <Run Text="{x:Bind CanCreateOrUpdateAppointments}" FontWeight="SemiBold"/><LineBreak/>
 <Run Text="DisplayColor"/> <Run Text="{x:Bind DisplayColor}" FontWeight="SemiBold"/><LineBreak/>
 <Run Text="OtherAppReadAccess"/> <Run Text="{x:Bind OtherAppReadAccess}" FontWeight="SemiBold"/><LineBreak/>
-<Run Text="SyncManager"/> <Run Text="{x:Bind SyncManager, Mode=OneWay}" FontWeight="SemiBold"/><LineBreak/>
+<Run Text="SyncManager"/> <Run Text="{x:Bind SyncManager}" FontWeight="SemiBold"/><LineBreak/>
 <Run Text="SummaryCardView"/> <Run Text="{x:Bind SummaryCardView}" FontWeight="SemiBold"/>
                             </TextBlock>
                             <TextBlock Grid.Row="0" Grid.Column="1">
-                                <Run Text="OtherAppWriteAccess: "/><Run Text="{x:Bind OtherAppWriteAccess, Mode=OneWay}" FontWeight="SemiBold"/>
+                                <Run Text="OtherAppWriteAccess: "/><Run Text="{x:Bind OtherAppWriteAccess}" FontWeight="SemiBold"/>
                             </TextBlock>
                         </Grid>
                     </Grid>
